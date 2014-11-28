@@ -23,6 +23,7 @@ var customLevels = {
   }
 };
 
+//get current environment detail from config file
 this.getLogLevel = function(type){
         return config.environments[config.currentEnv].currentLogLevel;
     }
@@ -33,12 +34,12 @@ this.logger = new(winston.Logger)({
     levels: customLevels.levels,
     transports: [
         new(winston.transports.Console)({
-            level: this.getLogLevel(), // Only write logs of info level or higher
+            level: this.getLogLevel(), 
             levels: customLevels.levels,
             colorize: true,
             timestamp: true
         }),
-        new(winston.transports.File)({
+        new(winston.transports.File)({                    //update logs in BaseApp.log file
             filename: './logs/BaseApp.log',
             maxsize: 1024 * 1024 * 1, // 1MB
             level: this.getLogLevel(),

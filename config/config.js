@@ -1,6 +1,6 @@
 
 exports.loadConfig = function(){
-    this.currentEnv = "qa";
+    this.currentEnv = "development";
   
     //  Log Levels
     this.logLevels = {

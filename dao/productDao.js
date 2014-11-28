@@ -4,9 +4,8 @@ var models = require('./../model/productModel.js');
 
 var myModel1 = models.myModel1;
 
-
+//GET method - fetch all blogs from db
 exports.showAllBlogs = function(request, response){
-	console.log("In show all");
 	myModel1.find({}, function (err, docs) {
 	  if(err){
 	  	logger.error("Could not fetch blog list");
@@ -18,6 +17,7 @@ exports.showAllBlogs = function(request, response){
 	});
 }
 
+//GET method - fetch blogs by Id from db
 exports.showBlogById = function(request, response){
 	myModel1.find({_id : request.params.id}, function (err, doc) {
 	  if(err){
@@ -35,7 +35,8 @@ exports.showBlogById = function(request, response){
 	});
 }
 
-exports.addBlog = function(request, response){                  // {"author" : "abc", "title": "pqr"}
+//POST method - insert blog in db
+exports.addBlog = function(request, response){                  //  format {"author" : "abc", "title": "pqr"}
 	var blog = new myModel1();
 	blog.author = request.body.author;
 	blog.title = request.body.title;
@@ -50,6 +51,7 @@ exports.addBlog = function(request, response){                  // {"author" : "
 	});
 }
 
+//PUT method - update blog in db
 exports.updateBlog = function(request, response){
 	myModel1.find({_id : request.params.id}, function(err, doc){
 		if(err){
@@ -78,6 +80,7 @@ exports.updateBlog = function(request, response){
 	});
 }
 
+//DELETE method  - remove blog from db
 exports.deleteBlog = function(request, response){
 	myModel1.find({_id : request.params.id}, function(err, doc){
 		if(err){
