@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
+var jade = require("jade");
 
 var app = express();
 
@@ -12,9 +13,21 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+app.set('view engine', 'jade');
+
 //connect to mongodb
 mongoose.connect('mongodb://localhost:27017/mongoExample');
 
+var myDB = mongoose.connection;
+
+//Error handling if conncetion fails
+myDB.on('error', function(){
+  logger.error('connection error')
+});
+//Check if successful connection is made
+myDB.once('open', function callback () {
+  logger.debug("database Connected with Mongoose");
+});
 //add route
 app.use(require('./routes.js'));
 

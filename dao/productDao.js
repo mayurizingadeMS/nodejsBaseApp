@@ -5,74 +5,74 @@ var models = require('./../model/productModel.js');
 var myModel1 = models.myModel1;
 
 //GET method - fetch all blogs from db
-exports.showAllBlogs = function(request, response){
+exports.showAllBlogs = function(callback){
 	myModel1.find({}, function (err, docs) {
 	  if(err){
 	  	logger.error("Could not fetch blog list");
-	  	response.sendStatus(400);
+	  	callback(400, null);
 	  }else{
 	  	logger.info("fetched blog list");
-	  	response.send(docs);
+	  	callback(null, docs);
 	  }
 	});
 }
 
 //GET method - fetch blogs by Id from db
-exports.showBlogById = function(request, response){
-	myModel1.find({_id : request.params.id}, function (err, doc) {
+exports.showBlogById = function(id , callback){
+	myModel1.find({_id : id}, function (err, doc) {
 	  if(err){
 	  	logger.error("Could not fetch the blog having id : "+request.params.id);
-	  	response.sendStatus(400);
+	  	callback(400, null);
 	  }else{
 	  	if(doc.length == 0){
 	  		logger.error("no blog found with id : "+request.params.id);
-			response.sendStatus(404);
+			callback(404, null);
 	  	}else{
 	  		logger.info("fetched the blog");
-	  		response.send(doc);
+	  		callback(null, doc);
 	  	}
 	  }
 	});
 }
 
 //POST method - insert blog in db
-exports.addBlog = function(request, response){                  //  format {"author" : "abc", "title": "pqr"}
+exports.addBlog = function(reqJSON, callback){                  //  format {"author" : "abc", "title": "pqr"}
 	var blog = new myModel1();
-	blog.author = request.body.author;
-	blog.title = request.body.title;
+	blog.author = reqJSON.author;
+	blog.title = reqJSON.title;
 	blog.save(function(err){
 		if(err){
 			logger.error("Could not add blog");
-			response.sendStatus(400);
+			callback(400, null);
 		}else{
 			logger.info("blog added");
-			response.sendStatus(200);
+			callback(null, 200);
 		}
 	});
 }
 
 //PUT method - update blog in db
-exports.updateBlog = function(request, response){
-	myModel1.find({_id : request.params.id}, function(err, doc){
+exports.updateBlog = function(id, reqJSON, callback){
+	myModel1.find({_id : id}, function(err, doc){
 		if(err){
 			logger.error("Could not fetch the blog having id : "+request.params.id);
-	  		response.sendStatus(400);
+	  		callback(400, null);
 		}else{
 			if(doc.length ==0){
 				logger.error("no blog found with id : "+request.params.id);
-				response.sendStatus(404);
+				callback(404, null);
 			}else{
-				myModel1.findByIdAndUpdate({_id: request.params.id},
+				myModel1.findByIdAndUpdate({_id: id},
 				    {
-				   	  author : request.body.author,
-				 	  title : request.body.title
+				   	  author : reqJSON.author,
+				 	  title : reqJSON.title
 				   }, function(err){
 				 	if(err){
 						logger.error("Could not update blog" + err);
-						response.sendStatus(400);
+						callback(400, null);
 					}else{
 						logger.info("blog updated");
-						response.sendStatus(200);
+						callback(null, 200);
 					}
 				});
 			}
@@ -81,23 +81,23 @@ exports.updateBlog = function(request, response){
 }
 
 //DELETE method  - remove blog from db
-exports.deleteBlog = function(request, response){
-	myModel1.find({_id : request.params.id}, function(err, doc){
+exports.deleteBlog = function(id, callback){
+	myModel1.find({_id : id}, function(err, doc){
 		if(err){
 			logger.error("Could not fetch the blog having id : "+request.params.id);
-	  		response.sendStatus(400);
+	  		callback(400, null);
 		}else{
 			if(doc.length ==0){
 				logger.error("no blog found with id : "+request.params.id);
-				response.sendStatus(404);
+				callback(404, null);
 			}else{
-				myModel1.remove({_id: request.params.id}, function(err){
+				myModel1.remove({_id: id}, function(err){
 					if(err){
 						logger.error("Could not remove blog");
-						response.sendStatus(400);
+						callback(400, null);
 					}else{
 						logger.info("blog removed");
-						response.sendStatus(200);
+						callback(null, 200);
 					}
 				});
 			}
