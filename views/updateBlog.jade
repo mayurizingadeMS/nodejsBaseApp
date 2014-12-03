@@ -1,0 +1,23 @@
+doctype html
+html
+  body
+    form(method='post', action='/updateBlog/' + data._id)
+      table
+        tr
+          td
+            label Author
+          |      
+          td
+            input(type='text', name = 'author', placeholder='Enter Author Name', value=data.author)
+        |      
+        tr
+          td
+            label Title
+          |        
+          td
+            p
+              input(type='text', name = 'title',  placeholder='Enter Title', , value=data.title)
+        | 
+        tr
+          td
+            input(type='submit', name='commit', value='UPDATE')

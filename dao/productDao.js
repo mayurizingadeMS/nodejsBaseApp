@@ -19,7 +19,7 @@ exports.showAllBlogs = function(callback){
 
 //GET method - fetch blogs by Id from db
 exports.showBlogById = function(id , callback){
-	myModel1.find({_id : id}, function (err, doc) {
+	myModel1.findOne({_id : id}, function (err, doc) {
 	  if(err){
 	  	logger.error("Could not fetch the blog having id : "+request.params.id);
 	  	callback(400, null);

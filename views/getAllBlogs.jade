@@ -1,39 +1,28 @@
 doctype html
 html(lang="en")
   head
-    title= pageTitle
-    script(type='text/javascript').
-      if (foo) bar(1 + 5)
+    title= BaseApp
   body
-    h1 Jade - node template engine  #{data[0].title}
-    #container.col
-      if youAreUsingJade
-        p You are amazing
-      else
-        p Get on it!
-      p.
-        Jade is a terse and simple templating language with a
-        strong focus on performance and powerful features.
-      p
-        ul
-  table(border="2")
-    tr
-        td AUTHOR
-        |     
-        td TITLE
-        |    
-        td EDIT
-        |    
-        td DELETE
-    for doc in data
+    p BaseApp : Blog Details
+     a(href='/showAddblog') ADD BLOG
+    table(border="2")
       tr
-        td #{doc.author}
-        |     
-        td #{doc.title}
-        |      
-        td
-          a(href='/blogs/')
-            | EDIT
-        td
-          a(href='/blogs/')
-            | DELETE
+          td AUTHOR
+          |     
+          td TITLE
+          |    
+          td EDIT
+          |    
+          td DELETE
+      for doc in data
+        tr
+          td #{doc.author}
+          |     
+          td #{doc.title}
+          |      
+          td
+            a(href='/showUpdateView/' + doc._id)
+              | EDIT
+          td
+            a(href='/showDeleteView/' + doc._id)
+              | DELETE

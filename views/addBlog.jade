@@ -1,0 +1,25 @@
+doctype html
+html
+  body
+    p #{message}
+    |   
+    form(method='post', action='/addBlog')
+      table
+        tr
+          td
+            label Author
+          |      
+          td
+            input(type='text', name= 'author', placeholder='Enter Author Name')
+        |      
+        tr
+          td
+            label Title
+          |        
+          td
+            p
+              input(type='text', name = 'title', placeholder='Enter Title')
+        |      
+        tr
+          td
+            input(type='submit', value='ADD')

@@ -1,0 +1,25 @@
+doctype html
+html
+  body
+    p #{message}
+    |   
+    form(method='post', action='/deleteBlog/' + data._id)
+      table
+        tr
+          td
+            label Author
+          |      
+          td
+            label #{data.author}
+        |      
+        tr
+          td
+            label Title
+          |        
+          td
+            p
+              label #{data.title}
+        |      
+        tr
+          td
+            input(type='submit', value='CONFIRM DELETE')
