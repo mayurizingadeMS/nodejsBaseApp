@@ -1,8 +1,11 @@
 doctype html
-html
+html(lang="en")
+  head
+    link(rel='stylesheet', href='css/bootstrap.css')
+    title= BaseApp
   body
-    p #{message}
-    |   
+    script(src='js/jquery.js')
+    script(src='js/bootstrap.min.js')
     form(method='post', action='/deleteBlog/' + data._id + '?_method=DELETE')
       table
         tr
