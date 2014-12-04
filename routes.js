@@ -125,7 +125,7 @@ router.get('/showUpdateView/:id', function(request, response){
 	});
 });
 
-router.post('/updateBlog/:id', function(request, response){
+router.put('/updateBlog/:id', function(request, response){
 	var id = request.params.id;
 	var reqJSON = request.body;
 	dao.updateBlog(id, reqJSON, function(error, doc){
@@ -162,7 +162,7 @@ router.get('/showDeleteView/:id', function(request, response){
 	});
 });
 
-router.post('/deleteBlog/:id', function(request, response){
+router.delete('/deleteBlog/:id', function(request, response){
 	var id = request.params.id;
 	dao.deleteBlog(id, function(error, doc){
 		if(error){

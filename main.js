@@ -5,6 +5,8 @@ var mongoose = require('mongoose');
 var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 var jade = require("jade");
+var connect        = require('connect');
+var methodOverride = require('method-override');
 
 var app = express();
 
@@ -12,6 +14,8 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 app.use(bodyParser.json());
+
+app.use(methodOverride('_method'));
 
 app.set('view engine', 'jade');
 

@@ -10,7 +10,9 @@
     "body-parser" : "latest",
     "mongoose":"latest",
     "cluster":"latest",
-    "jade":"latest"
+    "jade":"latest",
+    "method-override":"latest",
+    "connect":"latest"
   },
   "devDependencies": {},
   "scripts": {

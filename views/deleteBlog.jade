@@ -3,7 +3,7 @@ html
   body
     p #{message}
     |   
-    form(method='post', action='/deleteBlog/' + data._id)
+    form(method='post', action='/deleteBlog/' + data._id + '?_method=DELETE')
       table
         tr
           td

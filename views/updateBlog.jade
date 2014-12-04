@@ -1,7 +1,7 @@
 doctype html
 html
   body
-    form(method='post', action='/updateBlog/' + data._id)
+    form(method='post', action='/updateBlog/' + data._id + '?_method=PUT')
       table
         tr
           td
