@@ -7,17 +7,20 @@ var numCPUs = require('os').cpus().length;
 var jade = require("jade");
 var connect        = require('connect');
 var methodOverride = require('method-override');
+var path = require('path');
 
 var app = express();
+
+app.set('view engine', 'jade');
 
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json());                           
 
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method'));                  //for PUT/DELETE from jade
 
-app.set('view engine', 'jade');
+app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 
 //connect to mongodb
 mongoose.connect('mongodb://localhost:27017/mongoExample');

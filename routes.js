@@ -4,6 +4,7 @@ var logger =require('./logs.js').logger;
 var dao = require('./dao/productDao.js');
 
 //REST API
+var message = '';
 
 router.get('/blogsAPI', function(request, response){
 	dao.showAllBlogs(function(error, docs){
@@ -73,10 +74,14 @@ router.get('/', function(request, response){
 	dao.showAllBlogs(function(error, docs){
 		if(error){
 			logger.error(error.statusCode);
-			response.send(error);
+			message = "Error to load Blogs";
+			response.render('/',{
+				message : message
+			});
 		}else{
 			response.render('getAllBlogs',{
-				data : docs
+				data : docs,
+				message : message
 			});
 		}
 	});
@@ -91,21 +96,12 @@ router.post('/AddBlog', function(request, response){
 	dao.addBlog(reqJSON, function(error, doc){
 		if(error){
 			logger.error(error.statusCode);
-			response.render('addBlog',{
-				message : "error to add blog"
-			});
+			message = "Error to Add Blog";
+			response.redirect('/');
 
 		}else{
-			dao.showAllBlogs(function(error, docs){
-				if(error){
-					logger.error(error.statusCode);
-					response.send(error);
-				}else{
-					response.render('getAllBlogs',{
-						data : docs
-					});
-				}
-			});
+			message = "Blog Added";
+			response.redirect('/');
 		}
 	});
 });
@@ -115,8 +111,9 @@ router.get('/showUpdateView/:id', function(request, response){
 	var id = request.params.id;
 	dao.showBlogById(id, function(error, doc){
 		if(error){
-			logger.error(error.statusCode);
-			response.send(error);
+			logger.error("Error to load Blog with id : " + id);
+			message = "Error to load Blog with id : " + id;
+			response.redirect('/');
 		}else{
 			response.render('updateBlog',{
 				data : doc
@@ -130,19 +127,12 @@ router.put('/updateBlog/:id', function(request, response){
 	var reqJSON = request.body;
 	dao.updateBlog(id, reqJSON, function(error, doc){
 		if(error){
-			logger.error(error.statusCode);
-			response.sendStatus(error);
+			logger.error("Error to update Blog with id : " + id);
+			message = "Error to Update Blog";
+			response.redirect('/');
 		}else{
-			dao.showAllBlogs(function(error, docs){
-				if(error){
-					logger.error(error.statusCode);
-					response.send(error);
-				}else{
-					response.render('getAllBlogs',{
-						data : docs
-					});
-				}
-			});
+			message = "Blog Updated";
+			response.redirect('/');
 		}
 	});
 });
@@ -152,8 +142,9 @@ router.get('/showDeleteView/:id', function(request, response){
 	logger.info(id);
 	dao.showBlogById(id, function(error, doc){
 		if(error){
-			logger.error(error.statusCode);
-			response.send(error);
+			logger.error("Error to load Blog with id : " + id);
+			message = "Error to load Blog with id : " + id;
+			response.redirect('/');
 		}else{
 			response.render('deleteBlog',{
 				data : doc
@@ -166,19 +157,12 @@ router.delete('/deleteBlog/:id', function(request, response){
 	var id = request.params.id;
 	dao.deleteBlog(id, function(error, doc){
 		if(error){
-			logger.error(error.statusCode);
-			response.sendStatus(error);
+			logger.error("Error to delete Blog with id : " + id);
+			message = "Error to Delete Blog";
+			response.redirect('/');
 		}else{
-			dao.showAllBlogs(function(error, docs){
-				if(error){
-					logger.error(error.statusCode);
-					response.send(error);
-				}else{
-					response.render('getAllBlogs',{
-						data : docs
-					});
-				}
-			});
+			message = "Blog Deleted";
+			response.redirect('/');
 		}
 	});
 });
