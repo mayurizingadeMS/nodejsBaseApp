@@ -4,29 +4,32 @@ html(lang="en")
     link(rel='stylesheet', href='css/bootstrap.css')
     title= BaseApp
   body
-    script(src='js/jquery.js')
-    script(src='js/bootstrap.min.js')
-    p BaseApp : Blog Details     
-     a(href='/showAddblog') ADD BLOG
-     p #{message}
-    table(border="2")
-      tr
-          td AUTHOR
-          |     
-          td TITLE
-          |    
-          td EDIT
-          |    
-          td DELETE
-      for doc in data
-        tr
-          td #{doc.author}
-          |     
-          td #{doc.title}
-          |      
-          td
-            a(href='/showUpdateView/' + doc._id)
-              | EDIT
-          td
-            a(href='/showDeleteView/' + doc._id)
-              | DELETE
+    center
+      div(style='border:solid 2px black;margin-top:150px;width:300px;padding-bottom:30px;padding-top:30px')
+        script(src='js/jquery.js')
+        script(src='js/bootstrap.min.js')
+        p BaseApp : Blog Details  
+         a(href='/showAddblog')
+          u ADD BLOG
+         p(style='color:red') #{message}
+        table(border="2")
+          tr
+              td AUTHOR
+              |     
+              td TITLE
+              |    
+              td EDIT
+              |    
+              td DELETE
+          for doc in data
+            tr
+              td #{doc.author}
+              |     
+              td #{doc.title}
+              |      
+              td
+                a(href='/showUpdateView/' + doc._id)
+                  | EDIT
+              td
+                a(href='/showDeleteView/' + doc._id)
+                  | DELETE

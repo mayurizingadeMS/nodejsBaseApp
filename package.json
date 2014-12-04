@@ -4,17 +4,17 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
-    "express": "latest",
-    "winston":"latest",
-    "http":"latest",
-    "body-parser" : "latest",
-    "mongoose":"latest",
-    "cluster":"latest",
-    "jade":"latest",
-    "method-override":"latest",
-    "connect":"latest",
-    "bootstrap":"latest",
-    "path":"latest"
+    "express": "4.10.4",
+    "winston":"0.8.3",
+    "http":"0.0.0",
+    "body-parser" : "1.10.0",
+    "mongoose":"3.8.20",
+    "cluster":"0.7.7",
+    "jade":"1.8.1",
+    "method-override":"2.3.0",
+    "connect":"3.3.3",
+    "bootstrap":"3.3.1",
+    "path":"0.4.9"
   },
   "devDependencies": {},
   "scripts": {

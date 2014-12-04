@@ -4,25 +4,34 @@ html(lang="en")
     link(rel='stylesheet', href='css/bootstrap.css')
     title= BaseApp
   body
-    script(src='js/jquery.js')
-    script(src='js/bootstrap.min.js')
-    form(method='post', action='/deleteBlog/' + data._id + '?_method=DELETE')
-      table
-        tr
-          td
-            label Author
-          |      
-          td
-            label #{data.author}
-        |      
-        tr
-          td
-            label Title
-          |        
-          td
-            p
-              label #{data.title}
-        |      
-        tr
-          td
-            input(type='submit', value='CONFIRM DELETE')
+    center
+      div(style='border:solid 2px black;margin-top:150px;width:300px;padding-bottom:30px;padding-top:30px')
+        script(src='js/jquery.js')
+        script(src='js/bootstrap.min.js')
+        form(id='can', method='get', action='/')
+        form(id='del', method='post', action='/deleteBlog/' + data._id + '?_method=DELETE')
+          p Are you sure you want to delete the Blog
+          table
+            tr
+              td
+                label
+                  b Author
+              |      
+              td
+                label #{data.author}
+            |      
+            tr
+              td
+                label
+                  b Title
+              |        
+              td
+                p
+                  label #{data.title}
+            |      
+            tr
+              td
+                input(type='submit', value='CONFIRM', form='del')
+              |      
+              td
+                input(type='submit', value='CANCEL',form='can')

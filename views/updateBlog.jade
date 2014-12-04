@@ -4,25 +4,31 @@ html(lang="en")
     link(rel='stylesheet', href='css/bootstrap.css')
     title= BaseApp
   body
-    script(src='js/jquery.js')
-    script(src='js/bootstrap.min.js')
-    form(method='post', action='/updateBlog/' + data._id + '?_method=PUT')
-      table
-        tr
-          td
-            label Author
-          |      
-          td
-            input(type='text', name = 'author', placeholder='Enter Author Name', value=data.author)
-        |      
-        tr
-          td
-            label Title
-          |        
-          td
-            p
-              input(type='text', name = 'title',  placeholder='Enter Title', , value=data.title)
-        | 
-        tr
-          td
-            input(type='submit', name='commit', value='UPDATE')
+    center
+      div(style='border:solid 2px black;margin-top:150px;width:300px;padding-bottom:30px;padding-top:30px')
+        script(src='js/jquery.js')
+        script(src='js/bootstrap.min.js')
+        form(id='can', method='get', action='/')
+        form(id='update',method='post', action='/updateBlog/' + data._id + '?_method=PUT')
+          table
+            tr
+              td
+                label Author
+              |      
+              td
+                input(type='text', name = 'author', placeholder='Enter Author Name', value=data.author, form='update')
+            |      
+            tr
+              td
+                label Title
+              |        
+              td
+                p
+                  input(type='text', name = 'title',  placeholder='Enter Title', , value=data.title, form='update')
+            | 
+            tr
+              td
+                input(type='submit', value='UPDATE', form='update')
+              |      
+              td
+                input(type='submit', value='CANCEL',form='can')

@@ -4,25 +4,31 @@ html(lang="en")
     link(rel='stylesheet', href='css/bootstrap.css')
     title= BaseApp
   body
-    script(src='js/jquery.js')
-    script(src='js/bootstrap.min.js')   
-    form(method='post', action='/addBlog')
-      table
-        tr
-          td
-            label Author
-          |      
-          td
-            input(type='text', name= 'author', placeholder='Enter Author Name')
-        |      
-        tr
-          td
-            label Title
-          |        
-          td
-            p
-              input(type='text', name = 'title', placeholder='Enter Title')
-        |      
-        tr
-          td
-            input(type='submit', value='ADD')
+    center
+      div(style='border:solid 2px black;margin-top:150px;width:300px;padding-bottom:30px;padding-top:30px')
+        script(src='js/jquery.js')
+        script(src='js/bootstrap.min.js')   
+        form(id='can', method='get', action='/')
+        form(id='add', method='post', action='/addBlog')
+          table
+            tr
+              td
+                label Author
+              |      
+              td
+                input(type='text', name= 'author', placeholder='Enter Author Name', form='add')
+            |      
+            tr
+              td
+                label Title
+              |        
+              td
+                p
+                  input(type='text', name = 'title', placeholder='Enter Title', form='add')
+            |      
+            tr
+              td
+                input(type='submit', value='ADD', form='add')
+              |      
+              td
+                input(type='submit', value='CANCEL',form='can')

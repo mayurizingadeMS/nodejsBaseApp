@@ -3,9 +3,9 @@ var router = express.Router();
 var logger =require('./logs.js').logger;
 var dao = require('./dao/productDao.js');
 
-//REST API
 var message = '';
 
+//get all blogs API
 router.get('/blogsAPI', function(request, response){
 	dao.showAllBlogs(function(error, docs){
 		if(error){
@@ -17,6 +17,7 @@ router.get('/blogsAPI', function(request, response){
 	});
 });
 
+//get blog by Id API
 router.get('/blogAPI/:id', function(request, response){
 	var id = request.params.id;
 	dao.showBlogById(id, function(error, doc){
@@ -29,6 +30,7 @@ router.get('/blogAPI/:id', function(request, response){
 	});
 });
 
+//add blog API
 router.post('/blogAPI', function(request, response){
 	var reqJSON = request.body;
 	dao.addBlog(reqJSON, function(error, doc){
@@ -41,6 +43,7 @@ router.post('/blogAPI', function(request, response){
 	});
 });
 
+//update blog API
 router.put('/blogAPI/:id', function(request, response){
 	var id = request.params.id;
 	var reqJSON = request.body;
@@ -54,6 +57,7 @@ router.put('/blogAPI/:id', function(request, response){
 	});
 });
 
+//delete blog API
 router.delete('/blogAPI/:id', function(request, response){
 	var id = request.params.id;
 	dao.deleteBlog(id, function(error, doc){
@@ -68,8 +72,9 @@ router.delete('/blogAPI/:id', function(request, response){
 
 
 
-//for UI integration
+// now onwords for UI integration
 
+//show getAllBlogs page
 router.get('/', function(request, response){
 	dao.showAllBlogs(function(error, docs){
 		if(error){
@@ -87,10 +92,12 @@ router.get('/', function(request, response){
 	});
 });
 
+//show addBlog page
 router.get('/showAddblog', function(request, response){
 	response.render('addBlog');
 });
 
+//add blog to db
 router.post('/AddBlog', function(request, response){
 	var reqJSON = request.body;
 	dao.addBlog(reqJSON, function(error, doc){
@@ -106,7 +113,7 @@ router.post('/AddBlog', function(request, response){
 	});
 });
 
-
+//show update blog page
 router.get('/showUpdateView/:id', function(request, response){
 	var id = request.params.id;
 	dao.showBlogById(id, function(error, doc){
@@ -122,6 +129,7 @@ router.get('/showUpdateView/:id', function(request, response){
 	});
 });
 
+//update blog to db
 router.put('/updateBlog/:id', function(request, response){
 	var id = request.params.id;
 	var reqJSON = request.body;
@@ -137,6 +145,7 @@ router.put('/updateBlog/:id', function(request, response){
 	});
 });
 
+//show delete blog page
 router.get('/showDeleteView/:id', function(request, response){
 	var id = request.params.id;
 	logger.info(id);
@@ -153,6 +162,7 @@ router.get('/showDeleteView/:id', function(request, response){
 	});
 });
 
+//delete blog from db
 router.delete('/deleteBlog/:id', function(request, response){
 	var id = request.params.id;
 	dao.deleteBlog(id, function(error, doc){
