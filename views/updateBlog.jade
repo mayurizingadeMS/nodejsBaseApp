@@ -1,11 +1,6 @@
 doctype html
-html(lang="en")
-  head
-    link(rel='stylesheet', href='css/bootstrap.css')
-    title= BaseApp
+html
   body
-    script(src='js/jquery.js')
-    script(src='js/bootstrap.min.js')
     form(method='post', action='/updateBlog/' + data._id + '?_method=PUT')
       table
         tr

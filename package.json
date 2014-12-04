@@ -12,9 +12,7 @@
     "cluster":"latest",
     "jade":"latest",
     "method-override":"latest",
-    "connect":"latest",
-    "bootstrap":"latest",
-    "path":"latest"
+    "connect":"latest"
   },
   "devDependencies": {},
   "scripts": {
