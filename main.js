@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 var jade = require("jade");
-var connect        = require('connect');
+var connect = require('connect');
 var methodOverride = require('method-override');
 var path = require('path');
 
@@ -33,7 +33,7 @@ myDB.on('error', function(){
 });
 //Check if successful connection is made
 myDB.once('open', function callback () {
-  logger.debug("database Connected with Mongoose");
+  logger.info("database Connected with Mongoose");
 });
 //add route
 app.use(require('./routes.js'));

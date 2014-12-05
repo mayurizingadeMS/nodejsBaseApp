@@ -4,9 +4,11 @@ var logger =require('./logs.js').logger;
 var dao = require('./dao/productDao.js');
 
 var message = '';
+var getAllUpdateBlogChange = 0;
 
 //get all blogs API
 router.get('/blogsAPI', function(request, response){
+	logger.debug("In router for get url /blogsAPI");
 	dao.showAllBlogs(function(error, docs){
 		if(error){
 			logger.error(error.statusCode);
@@ -19,6 +21,7 @@ router.get('/blogsAPI', function(request, response){
 
 //get blog by Id API
 router.get('/blogAPI/:id', function(request, response){
+	logger.debug("In router for get url /blogAPI/:id");
 	var id = request.params.id;
 	dao.showBlogById(id, function(error, doc){
 		if(error){
@@ -32,6 +35,7 @@ router.get('/blogAPI/:id', function(request, response){
 
 //add blog API
 router.post('/blogAPI', function(request, response){
+	logger.debug("In router for post url /blogAPI");
 	var reqJSON = request.body;
 	dao.addBlog(reqJSON, function(error, doc){
 		if(error){
@@ -45,6 +49,7 @@ router.post('/blogAPI', function(request, response){
 
 //update blog API
 router.put('/blogAPI/:id', function(request, response){
+	logger.debug("In router for put url /blogAPI/:id");
 	var id = request.params.id;
 	var reqJSON = request.body;
 	dao.updateBlog(id, reqJSON, function(error, doc){
@@ -59,6 +64,7 @@ router.put('/blogAPI/:id', function(request, response){
 
 //delete blog API
 router.delete('/blogAPI/:id', function(request, response){
+	logger.debug("In router for delete url /blogAPI/:id");
 	var id = request.params.id;
 	dao.deleteBlog(id, function(error, doc){
 		if(error){
@@ -76,6 +82,7 @@ router.delete('/blogAPI/:id', function(request, response){
 
 //show getAllBlogs page
 router.get('/', function(request, response){
+	logger.debug("In router for get url /");
 	dao.showAllBlogs(function(error, docs){
 		if(error){
 			logger.error(error.statusCode);
@@ -84,6 +91,9 @@ router.get('/', function(request, response){
 				message : message
 			});
 		}else{
+			if(getAllUpdateBlogChange == 0)
+				message = '';
+			getAllUpdateBlogChange = 0;
 			response.render('getAllBlogs',{
 				data : docs,
 				message : message
@@ -94,11 +104,13 @@ router.get('/', function(request, response){
 
 //show addBlog page
 router.get('/showAddblog', function(request, response){
+	logger.debug("In router for get url /showAddblog");
 	response.render('addBlog');
 });
 
 //add blog to db
-router.post('/AddBlog', function(request, response){
+router.post('/addBlog', function(request, response){
+	logger.debug("In router for post url /addBlog");
 	var reqJSON = request.body;
 	dao.addBlog(reqJSON, function(error, doc){
 		if(error){
@@ -108,6 +120,7 @@ router.post('/AddBlog', function(request, response){
 
 		}else{
 			message = "Blog Added";
+			getAllUpdateBlogChange = 1;
 			response.redirect('/');
 		}
 	});
@@ -115,6 +128,7 @@ router.post('/AddBlog', function(request, response){
 
 //show update blog page
 router.get('/showUpdateView/:id', function(request, response){
+	logger.debug("In router for get url /showUpdateView/:id");
 	var id = request.params.id;
 	dao.showBlogById(id, function(error, doc){
 		if(error){
@@ -131,6 +145,7 @@ router.get('/showUpdateView/:id', function(request, response){
 
 //update blog to db
 router.put('/updateBlog/:id', function(request, response){
+	logger.debug("In router for put url /updateBlog/:id");
 	var id = request.params.id;
 	var reqJSON = request.body;
 	dao.updateBlog(id, reqJSON, function(error, doc){
@@ -140,6 +155,7 @@ router.put('/updateBlog/:id', function(request, response){
 			response.redirect('/');
 		}else{
 			message = "Blog Updated";
+			getAllUpdateBlogChange = 1;
 			response.redirect('/');
 		}
 	});
@@ -147,8 +163,8 @@ router.put('/updateBlog/:id', function(request, response){
 
 //show delete blog page
 router.get('/showDeleteView/:id', function(request, response){
+	logger.debug("In router for get url /showDeleteView/:id");
 	var id = request.params.id;
-	logger.info(id);
 	dao.showBlogById(id, function(error, doc){
 		if(error){
 			logger.error("Error to load Blog with id : " + id);
@@ -164,6 +180,7 @@ router.get('/showDeleteView/:id', function(request, response){
 
 //delete blog from db
 router.delete('/deleteBlog/:id', function(request, response){
+	logger.debug("In router for delete url /deleteBlog/:id");
 	var id = request.params.id;
 	dao.deleteBlog(id, function(error, doc){
 		if(error){
@@ -172,6 +189,7 @@ router.delete('/deleteBlog/:id', function(request, response){
 			response.redirect('/');
 		}else{
 			message = "Blog Deleted";
+			getAllUpdateBlogChange = 1;
 			response.redirect('/');
 		}
 	});

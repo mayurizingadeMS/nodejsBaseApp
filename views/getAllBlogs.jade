@@ -5,7 +5,7 @@ html(lang="en")
     title= BaseApp
   body
     center
-      div(style='border:solid 2px black;margin-top:150px;width:300px;padding-bottom:30px;padding-top:30px')
+      div(style='border:solid 2px black;margin-top:150px;width:auto;padding:30px;display: inline-block;')
         script(src='js/jquery.js')
         script(src='js/bootstrap.min.js')
         p BaseApp : Blog Details  
@@ -14,13 +14,17 @@ html(lang="en")
          p(style='color:red') #{message}
         table(border="2")
           tr
-              td AUTHOR
+              td 
+                b AUTHOR
               |     
-              td TITLE
+              td 
+                b TITLE
               |    
-              td EDIT
+              td 
+                b EDIT
               |    
-              td DELETE
+              td 
+                b DELETE
           for doc in data
             tr
               td #{doc.author}
