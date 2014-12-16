@@ -11,25 +11,26 @@ html(lang="en")
         form(id='can', method='get', action='/')
         form(id='update',method='post', action='/updateBlog/' + data._id + '?_method=PUT')
           p(style='color:green') Update the Blog Details
-          table
-            tr
-              td
-                label Author
+          if(data)
+            table
+              tr
+                td
+                  label Author
+                |      
+                td
+                  input(type='text', name = 'author', placeholder='Enter Author Name', value=data.author, form='update')
               |      
-              td
-                input(type='text', name = 'author', placeholder='Enter Author Name', value=data.author, form='update')
-            |      
-            tr
-              td
-                label Title
-              |        
-              td
-                p
-                  input(type='text', name = 'title',  placeholder='Enter Title', , value=data.title, form='update')
-            | 
-            tr
-              td
-                input(type='submit', value='UPDATE', form='update')
-              |      
-              td
-                input(type='submit', value='CANCEL',form='can')
+              tr
+                td
+                  label Title
+                |        
+                td
+                  p
+                    input(type='text', name = 'title',  placeholder='Enter Title', , value=data.title, form='update')
+              | 
+              tr
+                td
+                  input(type='submit', value='UPDATE', form='update')
+                |      
+                td
+                  input(type='submit', value='CANCEL',form='can')

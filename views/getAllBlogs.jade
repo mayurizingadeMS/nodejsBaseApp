@@ -12,28 +12,29 @@ html(lang="en")
          a(href='/showAddblog')
           u ADD BLOG
          p(style='color:red') #{message}
-        table(border="2")
-          tr
-              td 
-                b AUTHOR
-              |     
-              td 
-                b TITLE
-              |    
-              td 
-                b EDIT
-              |    
-              td 
-                b DELETE
-          for doc in data
+        if(data)
+          table(border="2")
             tr
-              td #{doc.author}
-              |     
-              td #{doc.title}
-              |      
-              td
-                a(href='/showUpdateView/' + doc._id)
-                  | EDIT
-              td
-                a(href='/showDeleteView/' + doc._id)
-                  | DELETE
+                td 
+                  b AUTHOR
+                |     
+                td 
+                  b TITLE
+                |    
+                td 
+                  b EDIT
+                |    
+                td 
+                  b DELETE
+            for doc in data
+              tr
+                td #{doc.author}
+                |     
+                td #{doc.title}
+                |      
+                td
+                  a(href='/showUpdateView/' + doc._id)
+                    | EDIT
+                td
+                  a(href='/showDeleteView/' + doc._id)
+                    | DELETE

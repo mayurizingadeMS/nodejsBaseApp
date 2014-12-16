@@ -11,27 +11,28 @@ html(lang="en")
         form(id='can', method='get', action='/')
         form(id='del', method='post', action='/deleteBlog/' + data._id + '?_method=DELETE')
           p(style='color:green') Are you sure you want to delete the Blog
-          table
-            tr
-              td
-                label
-                  b Author
+          if(data)
+            table
+              tr
+                td
+                  label
+                    b Author
+                |      
+                td
+                  label #{data.author}
               |      
-              td
-                label #{data.author}
-            |      
-            tr
-              td
-                label
-                  b Title
-              |        
-              td
-                p
-                  label #{data.title}
-            |      
-            tr
-              td
-                input(type='submit', value='CONFIRM', form='del')
+              tr
+                td
+                  label
+                    b Title
+                |        
+                td
+                  p
+                    label #{data.title}
               |      
-              td
-                input(type='submit', value='CANCEL',form='can')
+              tr
+                td
+                  input(type='submit', value='CONFIRM', form='del')
+                |      
+                td
+                  input(type='submit', value='CANCEL',form='can')

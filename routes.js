@@ -85,9 +85,9 @@ router.get('/', function(request, response){
 	logger.debug("In router for get url /");
 	dao.showAllBlogs(function(error, docs){
 		if(error){
-			logger.error(error.statusCode);
-			message = "Error to load Blogs";
-			response.render('/',{
+			logger.error("Error to load Blogs, Could not connect to database " +error);
+			message = "Error to load Blogs, Could not connect to database";
+			response.render('getAllBlogs',{
 				message : message
 			});
 		}else{
@@ -114,8 +114,8 @@ router.post('/addBlog', function(request, response){
 	var reqJSON = request.body;
 	dao.addBlog(reqJSON, function(error, doc){
 		if(error){
-			logger.error(error.statusCode);
-			message = "Error to Add Blog";
+			logger.error("Error to load Blogs, Could not connect to database " +error);
+			message = "Error to add Blogs, Could not connect to database ";
 			response.redirect('/');
 
 		}else{
